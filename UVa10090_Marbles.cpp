@@ -17,10 +17,12 @@ int main()
 
         for (int i = 0; i < (amount / capacity1) + 1; i++)
         {
+            // if box1Amount = i is a solution
             if ((amount - capacity1 * i) % capacity2 == 0)
             {
                 int j = (amount - capacity1 * i) / capacity2;
                 int newCost = cost1 * i + cost2 * j;
+                // if minCost = 0, this is the first solution found
                 if (newCost < minCost || minCost == 0)
                 {
                     minCost = newCost;
