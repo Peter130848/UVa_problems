@@ -2,7 +2,10 @@
 using namespace std;
 int main()
 {
-    int amount, cost1, cost2, capacity1, capacity2;
+    int amount, capacity1, capacity2, box1Amount, box2Amount;
+    int *highCPCap, *lowCPCap, *highCPAmount, *lowCPAmount;
+    double cost1, cost2;
+    double *highCPCost, *lowCPCost;
 
     while (cin >> amount)
     {
@@ -12,27 +15,39 @@ int main()
         }
 
         cin >> cost1 >> capacity1 >> cost2 >> capacity2;
-        int minCost = 0;
-        int box1Amount, box2Amount;
+        bool hasSolution = false;
 
-        for (int i = 0; i < (amount / capacity1) + 1; i++)
+        if (cost1 / capacity1 < cost2 / capacity2)
         {
-            // if box1Amount = i is a solution
-            if ((amount - capacity1 * i) % capacity2 == 0)
+            highCPCost = &cost1;
+            highCPCap = &capacity1;
+            highCPAmount = &box1Amount;
+            lowCPCost = &cost2;
+            lowCPCap = &capacity2;
+            lowCPAmount = &box2Amount;
+        }
+        else
+        {
+            highCPCost = &cost2;
+            highCPCap = &capacity2;
+            highCPAmount = &box2Amount;
+            lowCPCost = &cost1;
+            lowCPCap = &capacity1;
+            lowCPAmount = &box1Amount;
+        }
+
+        for (int i = 0; i < (amount / *lowCPCap) + 1; i++)
+        {
+            if ((amount - *lowCPCap * i) % *highCPCap == 0)
             {
-                int j = (amount - capacity1 * i) / capacity2;
-                int newCost = cost1 * i + cost2 * j;
-                // if minCost = 0, this is the first solution found
-                if (newCost < minCost || minCost == 0)
-                {
-                    minCost = newCost;
-                    box1Amount = i;
-                    box2Amount = j;
-                }
+                *lowCPAmount = i;
+                *highCPAmount = (amount - *lowCPCap * i) / *highCPCap;
+                hasSolution = true;
+                break;
             }
         }
 
-        if (minCost)
+        if (hasSolution)
         {
             cout << box1Amount << " " << box2Amount << endl;
         }
