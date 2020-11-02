@@ -1,5 +1,4 @@
 #include <iostream>
-#include <algorithm>
 using namespace std;
 
 void findMaxMin(int[], int, int, int);
@@ -24,6 +23,7 @@ void findMaxMin(int numbers[], int n, int m, int sum)
 {
     bool avaliable[n + 1][5001] = {};
     avaliable[0][2500] = true;
+    // find all the possible sum in the first parenthesis
     for (int t = 0; t < n + m; t++)
     {
         // if t + 1 < n, avaliable[n][?] can't be ture
@@ -53,6 +53,7 @@ void findMaxMin(int numbers[], int n, int m, int sum)
         }
     }
 
+    // find answer
     int max = -2500 * 2500, min = 2500 * 2500;
     for (int i = 0; i <= 5000; i++)
     {
