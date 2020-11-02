@@ -7,6 +7,7 @@ int main()
 
     while (cases--)
     {
+        // 吃掉換行
         string nextLine;
         getline(cin, nextLine);
 
@@ -28,9 +29,10 @@ int main()
 
         bool dp[totalWeight + 1] = {};
         dp[0] = true;
-
+        
         for (int i = 0; i < luggageAmount; i++)
         {
+            // 看看加 weight[i] 後，j能不能達到
             for (int j = totalWeight; j >= weight[i]; j--)
             {
                 if (dp[j - weight[i]])
