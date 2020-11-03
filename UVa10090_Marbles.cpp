@@ -1,4 +1,65 @@
 #include <iostream>
+#include <math.h>
+using namespace std;
+
+void exgcd(long long a, long long b,
+           long long &r, long long &x, long long &y)
+{
+    if (!b)
+    {
+        r = a;
+        x = 1;
+        y = 0;
+    }
+    else
+    {
+        exgcd(b, a % b, r, y, x);
+        y -= (a / b) * x;
+    }
+}
+
+int main()
+{
+    long long n, c1, n1, c2, n2, r, x, y;
+    while (cin >> n && n)
+    {
+        cin >> c1 >> n1 >> c2 >> n2;
+        exgcd(n1, n2, r, x, y);
+        cout << x << " " << y << endl;
+        // 最少要多少 n2 / r 讓 x 變成正的
+        long long lower = ceil(-1.0 * n * x / n2);
+        // y 最多可以減多少 n1 / r 還不是負的
+        long long upper = floor(1.0 * n * y / n1);
+        
+        // 無法讓兩個都是正的
+        if (n % r || lower > upper)
+        {
+            cout << "failed" << endl;
+        }
+        else if (c1 * n2 >= c2 * n1)
+        {
+            // 讓 x 最小
+            x = x * n / r + n2 / r * lower;
+            y = y * n / r - n1 / r * lower;
+            cout << x << " " << y << endl;
+        }
+        else
+        {
+            // 讓 y 最小
+            x = x * n / r + n2 / r * upper;
+            y = y * n / r - n1 / r * upper;
+            cout << x << " " << y << endl;
+        }
+    }
+    return 0;
+}
+
+
+
+
+
+/*
+#include <iostream>
 using namespace std;
 int main()
 {
@@ -57,3 +118,4 @@ int main()
         }
     }
 }
+*/
