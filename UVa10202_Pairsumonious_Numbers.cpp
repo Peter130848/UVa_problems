@@ -50,7 +50,10 @@ void findAnswer(vector<int> sum, int numberAmount)
         {
             for (int j = 0; j < numberAmount; j++)
             {
-                cout << result[j] << " ";
+                cout << result[j];
+                if (j < numberAmount - 1){
+                    cout << " ";
+                }
             }
             cout << endl;
             noAnswer = false;
