@@ -35,9 +35,9 @@ int main()
         Node jobs[jobAmount];
         for (int i = 0; i < jobAmount; i++)
         {
-            double time, fine;
-            cin >> time >> fine;
-            jobs[i].tf = fine / time;
+            double takeTime, fine;
+            cin >> takeTime >> fine;
+            jobs[i].tf = fine / takeTime;
             jobs[i].order = i + 1;
         }
 
