@@ -1,5 +1,5 @@
-#include<iostream>
-#include<set>
+#include <iostream>
+#include <set>
 
 using namespace std;
 int main(){
@@ -10,6 +10,8 @@ int main(){
         cin >> lanOneSize >> lanTwoSize;
         string lan1[lanOneSize];
         string lan2[lanTwoSize];
+        
+        // clear \n in buffer
         getline(cin, lan1[0]);
         for (int i = 0; i < lanOneSize; i++)
             getline(cin, lan1[i]);
